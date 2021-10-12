@@ -1,0 +1,9 @@
+.pageContainer {
+  width: 100%;
+  max-height: 1980px;
+
+  background-color: #ffef96;
+}
+body {
+  background-color: #ffef96;
+}

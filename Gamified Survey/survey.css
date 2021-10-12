@@ -2,16 +2,25 @@
   padding: 0;
   margin: 0;
 }
+body {
+  background-color: #ffef96;
+}
 #game {
-  width: 500px;
-  height: 200px;
+  width: 1395px;
+  height: 245px;
 
-  border: 1px solid black;
+  border-bottom: 0.5px solid black;
+  border-top: 0.5px solid black;
+
+  transform: translateY(80%);
 }
 .questions {
   text-align: center;
 
   font-style: italic;
+  font-size: 45px;
+
+  color: #50394c;
 }
 #character {
   width: 20px;
@@ -19,26 +28,48 @@
   background-color: red;
 
   position: relative;
-  top: 128px;
+  top: 145px;
   left: 50%;
 }
+.animate {
+  animation: jump 500ms;
+}
+
+@keyframes jump {
+  0% {
+    top: 120px;
+  }
+  30% {
+    top: 60px;
+  }
+  70% {
+    top: 60px;
+  }
+  100% {
+    top: 120px;
+  }
+}
+
+/* Other */
 #options {
-  display: flex;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-gap: 25px;
 }
 #option-One,
 #option-Two,
 #option-Three {
-  width: 50px;
+  width: 62px;
   min-height: 20px;
 
-  background-color: blue;
+  background-color: #5f9ea0;
   position: relative;
 
   top: 10%;
   left: 15%;
 
-  animation: aniOp 10s infinite;
+  animation: aniOp 1.5s infinite;
+  animation-direction: alternate-reverse;
 
   padding: 5px;
 }
@@ -52,9 +83,9 @@
 }
 @keyframes aniOp {
   0% {
-    left: 450px;
+    left: 750px;
   }
   100% {
-    left: -40px;
+    left: 450px;
   }
 }

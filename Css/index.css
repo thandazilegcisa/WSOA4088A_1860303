@@ -9,7 +9,7 @@
   position: absolute;
   left: 50%;
 
-  padding: 10px;
+  padding: 45px;
   transform: translate(-50%, 0%);
 }
 .navigation-container ul {
@@ -24,6 +24,8 @@
 
   text-decoration: none;
   color: black;
+
+  font-size: 15px;
 }
 /* Main Content Styling */
 
@@ -57,8 +59,11 @@
   font-family: sans-serif;
 
   display: flex;
+  text-align: center;
   justify-content: center;
   transform: translateY(125px);
+
+  min-width: 20%;
 
   margin: 25px;
 }
@@ -67,4 +72,61 @@
   flex-direction: column;
 
   padding: 25px;
+
+  text-align: center;
+}
+
+/* Blogs Section*/
+.blogsHeader {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+
+  padding: 45px;
+
+  font-size: 75px;
+
+  color: #ffef96;
+}
+#blogs-Container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-gap: 45px;
+
+  padding-top: 35px;
+  padding-left: 45px;
+  padding-right: 25px;
+  padding-bottom: 25px;
+}
+.card {
+  display: grid;
+  grid-template-rows: max-content 200px 1fr;
+}
+.card-Header {
+  margin-top: 15px;
+  margin-bottom: 45px;
+
+  color: #50394c;
+  font-weight: 500px;
+}
+.card a {
+  text-decoration: none;
+  background-color: #ffef96;
+  border-radius: 8px;
+
+  width: 45%;
+
+  padding: 15px;
+
+  color: #5f9ea0;
+}
+.aboutHeader {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+
+  padding: 45px;
+
+  font-size: 45px;
+  color: #5f9ea0;
 }
