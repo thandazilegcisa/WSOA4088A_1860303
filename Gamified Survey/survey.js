@@ -1,5 +1,5 @@
-let character = document.getElementById("character");
-let optionOne = document.getElementById("option-One").getBoundingClientRect(); 
+let character = document.getElementById("character")
+let optionOne = document.getElementById("option-One")
 let optionTwo = document.getElementById("option-Two")
 let optionThree = document.getElementById("option-Three")
 
@@ -18,13 +18,6 @@ document.addEventListener("keyup", function(event){
 })
 
 
-function touching(div1,div2){
-    let ox = Math.abs(character.x - optionOne.x) < (character.x < optionOne.x ? optionOne.width : character.width);
-    let oy = Math.abs(character.y - optionOne.y) < (character.y < optionOne.y ? optionOne.height : character.height);
-    return ox && oy;
-}
-
-var t = touching(character,optionOne)
 /*
 let collsionCheck = setInterval(function(){
     var characterTop = window.getComputedStyle(character).getPropertyValue("top")

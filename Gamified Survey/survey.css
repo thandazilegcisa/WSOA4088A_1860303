@@ -4,7 +4,18 @@
 }
 body {
   background-color: #ffef96;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+#canvas {
+  border: 1px solid black;
+}
+
 #game {
   width: 1395px;
   height: 245px;
@@ -15,12 +26,10 @@ body {
   transform: translateY(80%);
 }
 .questions {
+  font-size: 25px;
+
+  transform: translateY(550%);
   text-align: center;
-
-  font-style: italic;
-  font-size: 45px;
-
-  color: #50394c;
 }
 #character {
   width: 20px;
@@ -88,4 +97,8 @@ body {
   100% {
     left: 450px;
   }
+}
+#canvas {
+  border-radius: 5px;
+  background-color: black;
 }
