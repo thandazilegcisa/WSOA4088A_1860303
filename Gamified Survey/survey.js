@@ -1,3 +1,4 @@
+/*
 let character = document.getElementById("character")
 let optionOne = document.getElementById("option-One")
 let optionTwo = document.getElementById("option-Two")
@@ -16,7 +17,7 @@ document.addEventListener("keyup", function(event){
         })
     }    
 })
-
+*/
 
 /*
 let collsionCheck = setInterval(function(){

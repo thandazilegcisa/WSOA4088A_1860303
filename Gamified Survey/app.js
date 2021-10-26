@@ -1,7 +1,23 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-let presetTime =   1500;
+let question = document.querySelector(".questions")
+question.innerText = "Do you often answer surveys?"
+
+let isQuestionOne = true;
+let isQuestionTwo = false;
+let isQuestionThree = false;
+let isQuestionFour = false;
+let isQuestionFive = false;
+let isQuestionSix = false;
+let isQuestionSeven = false;
+let isQuestionEight = false;
+let isQuestionNine = false;
+
+let presetTime =  800;
+
+let score = 0;
+let scoreIncrement = 0;
 
 function drawBackgroundLine(){
     ctx.beginPath();
@@ -10,21 +26,31 @@ function drawBackgroundLine(){
     ctx.lineWidth = 1.8;
     ctx.strokeStyle = "black";
     ctx.stroke();
-
 }
+
+function drawScore(){
+    ctx.font = "45px Arial";
+    ctx.fillStyle ="black";
+    let scoreString = score.toString();    
+    let xOffset = ((scoreString.length -1) * 20);
+    ctx.fillText(scoreString, 45 - xOffset, 120);
+}
+ 
 function getRandomNumber(min,max){
     return Math.floor(Math.random() * (max-min + 1)) +min;
 }
+
 function randomNumberInterval(timeInterval){
     let returnTime = timeInterval;
-    if(Math.random() < 1.5){
-        returnTime += getRandomNumber(presetTime / 3, presetTime * 1.5);
+    if(Math.random() < 4 ){
+        returnTime += getRandomNumber(presetTime/6 , presetTime /6);
     }
     else{
-        returnTime -= getRandomNumber(presetTime /5, presetTime /2);
+        returnTime -= getRandomNumber(presetTime/6 , presetTime /6);
     }
     return returnTime; 
 }
+
 class Player{
     constructor(x,y,size,color){
         this.x=x;
@@ -32,7 +58,7 @@ class Player{
         this.size=size
         this.color=color;
 
-        this.jumpHeight = 12;
+        this.jumpHeight = 6 ;
         this.shouldJump = false;
         this.jumpCounter = 0;
     }
@@ -59,16 +85,14 @@ class Player{
         ctx.fillRect(this.x,this.y,this.size,this.size);
     }
 }
-let player = new Player(150,350,50,"black");
-
-
+let player = new Player(280,350,50,"black");
 
 class Options{
-    constructor(size,speed){
-        this.x = 450  +size;
+    constructor(size,speed,color){
+        this.x =  50 -size;
         this.y = 290 -size;
         this.size = size;
-        this.color= "purple";
+        this.color= color;
         this.slideSpeed = speed;
     }
     draw(){
@@ -77,18 +101,19 @@ class Options{
     }
     slide(){
         this.draw()
-        this.x -= this.slideSpeed;
+        this.x += this.slideSpeed;
     }
 }
-let arrayOptions = [];   
+let arrayOptions = [];
 
 function generateOptions(){
-    let timeDelay = randomNumberInterval(presetTime);
-    arrayOptions.push(new Options (45,1));
-
-    setTimeout(generateOptions,timeDelay);
+    let timeDelay = randomNumberInterval(presetTime/2);
+    arrayOptions.push( new Options (45,2,"purple"));
+    
+    setTimeout(generateOptions, timeDelay);
 }
- 
+
+// Check if objects are colliding
 function squareCollision(player,option){
     let s1 = Object.assign(Object.create(Object.getPrototypeOf(player)),player);
     let s2 = Object.assign(Object.create(Object.getPrototypeOf(option)),option);
@@ -106,22 +131,66 @@ function squareCollision(player,option){
 }
 let animationId = null;
 
-function animate(){
-    requestAnimationFrame(animate);
+function animate(){ 
+    animationId = requestAnimationFrame(animate);
     ctx.clearRect(0,0,canvas.width,canvas.height);
+    // Draw line
     drawBackgroundLine();
-    player.draw();
-    
 
+    // Draw Player
+    player.draw(); 
+ 
+    
+    for(let i =0; i < arrayOptions.length; i++){
+        if(arrayOptions[i]){
+            let option = new Options (45,5,"red");
+        }
+    }
+ 
     arrayOptions.forEach(function(option,index){
         option.slide();
 
-        if(squareCollision(player,arrayOptions)){
-            cancelAnimationFrame(animationId)
-            console.log("you hit me");
+        if(squareCollision(player,option)){
+            if(isQuestionOne){
+                isQuestionOne = false
+            }
+            if(isQuestionOne === false && eventCounter === 1){
+                question.innerText ="Do you complete every survey that you start?";
+                isQuestionTwo = true;
+            }
+            if(isQuestionTwo === true && eventCounter === 2){
+                question.innerText = "Do you consider answering surveys as dull or un-engaging?";
+                isQuestionThree = true;
+            } 
+            if(isQuestionThree === true && eventCounter === 3){
+                question.innerText = "Have you ever encountered the term gamification?";
+                isQuestionFour = true;
+            } 
+            if(isQuestionFour === true && eventCounter === 4){
+                question.innerText = "Have you ever filled out a gamified survey?";
+                isQuestionFive = true;
+            } 
+            if(isQuestionFive  === true && eventCounter === 5){
+                question.innerText = "Do you feel like you'd pay more attention to a gamified survey?";
+                isQuestionSix = true;
+            } 
+            if(isQuestionSix === true && eventCounter === 6){
+                question.innerText = "Does this gamified survey pressure you in a positive way?";
+                isQuestionSeven = true;
+            } 
+            if(isQuestionSeven === true && eventCounter === 7){
+                question.innerText = "Does it inspire you to complete the survey?";
+                isQuestionEight = true;
+            } 
+            if(isQuestionEight === true && eventCounter === 8){
+                question.innerText = "Do you feel motivated to participate in the survey out of your own will?";
+                isQuestionNine = true;
+                cancelAnimationFrame(animationId);
+            } 
         }
 
-        if((arrayOptions.x + arrayOptions.size) <= 0){
+        if((arrayOptions.x + arrayOptions.size) <= canvas.width){
+            option.slideSpeed = -speed;
             setTimeout(() =>{
                 arrayOptions.splice(index,1);
             },0)
@@ -129,12 +198,16 @@ function animate(){
     })
 }
 animate();
+
 setTimeout(()=>{
     generateOptions();
-},randomNumberInterval(presetTime))
+})   
+
+let eventCounter = 0
 
 document.addEventListener("keydown" , function(event){
     if(event.code == "Space"){
+        eventCounter ++;
         if(!player.shouldJump){
             player.jumpCounter = 0;
             player.shouldJump = true;
