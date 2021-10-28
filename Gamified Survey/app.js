@@ -1,20 +1,25 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-let question = document.querySelector(".questions")
-question.innerText = "Do you often answer surveys?"
 
+canvas.width = 600
+canvas.height = 600
+
+let question = document.querySelector(".questions")
+question.innerText = "Do you often answer surveys?";
+
+ 
 let isQuestionOne = true;
 let isQuestionTwo = false;
 let isQuestionThree = false;
-let isQuestionFour = false;
+let isQuestionFour = false; 
 let isQuestionFive = false;
 let isQuestionSix = false;
 let isQuestionSeven = false;
 let isQuestionEight = false;
 let isQuestionNine = false;
 
-let presetTime =  800;
+let presetTime =  1000;
 
 let score = 0;
 let scoreIncrement = 0;
@@ -29,11 +34,11 @@ function drawBackgroundLine(){
 }
 
 function drawScore(){
-    ctx.font = "45px Arial";
+    ctx.font = "20px Arial";
     ctx.fillStyle ="black";
     let scoreString = score.toString();    
     let xOffset = ((scoreString.length -1) * 20);
-    ctx.fillText(scoreString, 45 - xOffset, 120);
+    ctx.fillText(scoreString, 85 - xOffset, 119);
 }
  
 function getRandomNumber(min,max){
@@ -103,13 +108,22 @@ class Options{
         this.draw()
         this.x += this.slideSpeed;
     }
+    slideBackward(){
+        this.x -= this.slideSpeed;
+    }
 }
-let arrayOptions = [];
+
+let optionOne = new Options (45,2,"red");
+let optionTwo = new Options (45,2, "purple");
+let optionThree = new Options (45,2, "green");
+
+let arrayOptions = [];  
 
 function generateOptions(){
     let timeDelay = randomNumberInterval(presetTime/2);
-    arrayOptions.push( new Options (45,2,"purple"));
-    
+    let arrayOne =arrayOptions.push(new Options (45,2, "purple"));
+    console.log(arrayOptions);
+
     setTimeout(generateOptions, timeDelay);
 }
 
@@ -136,21 +150,16 @@ function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     // Draw line
     drawBackgroundLine();
-
+    // Draw Score
+    drawScore();
     // Draw Player
     player.draw(); 
- 
-    
-    for(let i =0; i < arrayOptions.length; i++){
-        if(arrayOptions[i]){
-            let option = new Options (45,5,"red");
-        }
-    }
- 
+
+ /*
     arrayOptions.forEach(function(option,index){
         option.slide();
 
-        if(squareCollision(player,option)){
+        if(squareCollision(player,option)){ 
             if(isQuestionOne){
                 isQuestionOne = false
             }
@@ -163,39 +172,71 @@ function animate(){
                 isQuestionThree = true;
             } 
             if(isQuestionThree === true && eventCounter === 3){
+                isQuestionTwo = false;
                 question.innerText = "Have you ever encountered the term gamification?";
                 isQuestionFour = true;
             } 
             if(isQuestionFour === true && eventCounter === 4){
+                isQuestionThree = false;
                 question.innerText = "Have you ever filled out a gamified survey?";
                 isQuestionFive = true;
             } 
             if(isQuestionFive  === true && eventCounter === 5){
+                isQuestionFour = false;
                 question.innerText = "Do you feel like you'd pay more attention to a gamified survey?";
                 isQuestionSix = true;
             } 
             if(isQuestionSix === true && eventCounter === 6){
+                isQuestionFive = false;
                 question.innerText = "Does this gamified survey pressure you in a positive way?";
                 isQuestionSeven = true;
             } 
             if(isQuestionSeven === true && eventCounter === 7){
+                isQuestionSix = false;
                 question.innerText = "Does it inspire you to complete the survey?";
                 isQuestionEight = true;
             } 
             if(isQuestionEight === true && eventCounter === 8){
-                question.innerText = "Do you feel motivated to participate in the survey out of your own will?";
+                isQuestionSeven = false;
+                question.innerText = "Do you feel motivated to participate out of your own will?";
                 isQuestionNine = true;
+            }
+            if(isQuestionNine === true && eventCounter === 9){
+                isQuestionEight = false;
+                isQuestionOne = true;
                 cancelAnimationFrame(animationId);
-            } 
+            }
         }
 
-        if((arrayOptions.x + arrayOptions.size) <= canvas.width){
-            option.slideSpeed = -speed;
+        if((option.x + option.size) > canvas.width){
             setTimeout(() =>{
-                arrayOptions.splice(index,1);
+                arrayOptions.splice(0,1);
             },0)
-        } 
+        }
     })
+*/
+    for(let i=0; i< arrayOptions.length;i++){
+        arrayOptions[i].slide();
+        if((arrayOptions[i].x + arrayOptions[i].size) >1200){
+            setTimeout(() =>{
+                arrayOptions.unshift();
+            },0)
+        }
+        if( i % 2 == 0){
+            arrayOptions[2].color = "Red";
+        }
+        /*
+        if(arrayOptions[2]){
+            arrayOptions[2].color = "Red";
+        } 
+        if(arrayOptions[4]){
+            arrayOptions[4].color = "Green"
+        }
+        if(arrayOptions[6]){
+            arrayOptions[6].color = "Red"
+        }*/
+    }
+
 }
 animate();
 

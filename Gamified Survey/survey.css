@@ -28,8 +28,20 @@ body {
 .questions {
   font-size: 25px;
 
-  transform: translateY(550%);
+  transform: translateY(750%);
   text-align: center;
+}
+.answersUI {
+  font-size: 25px;
+  transform: translate(5%, 820%);
+}
+.neutral {
+  font-size: 25px;
+  transform: translate(45%, 720%);
+}
+.no {
+  font-size: 25px;
+  transform: translate(82%, 620%);
 }
 #character {
   width: 20px;
@@ -101,4 +113,13 @@ body {
 #canvas {
   border-radius: 5px;
   background-color: black;
+}
+.header-Survey {
+  color: #50394c;
+  font-size: 55px;
+  font-family: sans-serif;
+
+  display: flex;
+  justify-content: center;
+  transform: translateY(210px);
 }
