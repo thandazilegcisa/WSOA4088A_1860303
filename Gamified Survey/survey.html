@@ -23,13 +23,10 @@
         </nav>
       </header>
       <header><h1 class="header-Survey">Gamified Survey:</h1></header>
-      <section class="answersUI">Yes:</section>
-      <section class="neutral">Neutral:</section>
-      <section class="no">No:</section>
+      <progress id="file" value="20" max="100"></progress>
       <section class="questions">
         <p>Have you ever answered a Gamified Survey?</p>
       </section>
-      <section class="Score"></section>
       <br />
       <canvas
         width="600"
@@ -37,20 +34,12 @@
         id="canvas"
         style="background-color: #ffef96"
       ></canvas>
-      <!--
-      <div id="game">
-        <section class="questions">
-          <p>Have you ever answered a Gamified Survey?</p>
-        </section>
-        <div id="character"></div>
-
-        <div id="options">
-          <div id="option-One">Yes</div>
-          <div id="option-Two">Neutral</div>
-          <div id="option-Three">No</div>
-        </div>
-      </div>
-      -->
+      <article></article>
+      <section>
+        <div class="purple"><p>Yes</p></div>
+        <div class="red"><p>No</p></div>
+        <div class="green"><p>Neutral</p></div>
+      </section>
     </main>
   </body>
   <script src="./survey.js" type="module"></script>

@@ -8,7 +8,9 @@ canvas.height = 600
 let question = document.querySelector(".questions")
 question.innerText = "Do you often answer surveys?";
 
- 
+let progressBar = document.querySelector("#file");
+progressBar.value = 10;
+
 let isQuestionOne = true;
 let isQuestionTwo = false;
 let isQuestionThree = false;
@@ -33,13 +35,6 @@ function drawBackgroundLine(){
     ctx.stroke();
 }
 
-function drawScore(){
-    ctx.font = "20px Arial";
-    ctx.fillStyle ="black";
-    let scoreString = score.toString();    
-    let xOffset = ((scoreString.length -1) * 20);
-    ctx.fillText(scoreString, 85 - xOffset, 119);
-}
  
 function getRandomNumber(min,max){
     return Math.floor(Math.random() * (max-min + 1)) +min;
@@ -150,82 +145,17 @@ function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     // Draw line
     drawBackgroundLine();
-    // Draw Score
-    drawScore();
     // Draw Player
     player.draw(); 
 
- /*
-    arrayOptions.forEach(function(option,index){
-        option.slide();
-
-        if(squareCollision(player,option)){ 
-            if(isQuestionOne){
-                isQuestionOne = false
-            }
-            if(isQuestionOne === false && eventCounter === 1){
-                question.innerText ="Do you complete every survey that you start?";
-                isQuestionTwo = true;
-            }
-            if(isQuestionTwo === true && eventCounter === 2){
-                question.innerText = "Do you consider answering surveys as dull or un-engaging?";
-                isQuestionThree = true;
-            } 
-            if(isQuestionThree === true && eventCounter === 3){
-                isQuestionTwo = false;
-                question.innerText = "Have you ever encountered the term gamification?";
-                isQuestionFour = true;
-            } 
-            if(isQuestionFour === true && eventCounter === 4){
-                isQuestionThree = false;
-                question.innerText = "Have you ever filled out a gamified survey?";
-                isQuestionFive = true;
-            } 
-            if(isQuestionFive  === true && eventCounter === 5){
-                isQuestionFour = false;
-                question.innerText = "Do you feel like you'd pay more attention to a gamified survey?";
-                isQuestionSix = true;
-            } 
-            if(isQuestionSix === true && eventCounter === 6){
-                isQuestionFive = false;
-                question.innerText = "Does this gamified survey pressure you in a positive way?";
-                isQuestionSeven = true;
-            } 
-            if(isQuestionSeven === true && eventCounter === 7){
-                isQuestionSix = false;
-                question.innerText = "Does it inspire you to complete the survey?";
-                isQuestionEight = true;
-            } 
-            if(isQuestionEight === true && eventCounter === 8){
-                isQuestionSeven = false;
-                question.innerText = "Do you feel motivated to participate out of your own will?";
-                isQuestionNine = true;
-            }
-            if(isQuestionNine === true && eventCounter === 9){
-                isQuestionEight = false;
-                isQuestionOne = true;
-                cancelAnimationFrame(animationId);
-            }
-        }
-
-        if((option.x + option.size) > canvas.width){
-            setTimeout(() =>{
-                arrayOptions.splice(0,1);
-            },0)
-        }
-    })
-*/
     for(let i=0; i< arrayOptions.length;i++){
         arrayOptions[i].slide();
-        if((arrayOptions[i].x + arrayOptions[i].size) >1200){
+        if((arrayOptions[i].x + arrayOptions[i].size) > 1200){
             setTimeout(() =>{
-                arrayOptions.unshift();
+                arrayOptions.splice(0,12);
             },0)
         }
-        if( i % 2 == 0){
-            arrayOptions[2].color = "Red";
-        }
-        /*
+        
         if(arrayOptions[2]){
             arrayOptions[2].color = "Red";
         } 
@@ -234,8 +164,82 @@ function animate(){
         }
         if(arrayOptions[6]){
             arrayOptions[6].color = "Red"
-        }*/
+        }
+        if(arrayOptions[8]){
+            arrayOptions[8].color = "Green"
+        }
+        if(arrayOptions[9]){
+            arrayOptions[9].color = "Green"
+        }
+        if(arrayOptions[12]){
+            arrayOptions[12].color ="red"
+        }
+
+
+        
     }
+
+    arrayOptions.forEach(function(option,index){
+        if(squareCollision(player,option)){ 
+            if(isQuestionOne){
+                isQuestionOne = false
+                progressBar.value =15;
+            }
+            if(isQuestionOne === false && eventCounter === 1 ){
+                question.innerText ="Do you complete every survey that you start?";
+                isQuestionTwo = true;
+                progressBar.value = 30;
+            }
+            if(isQuestionTwo === true && eventCounter === 2 ) {
+                question.innerText = "Do you consider surveys as dull or un-engaging?";
+                isQuestionThree = true;
+                progressBar.value = 40;
+            } 
+            if(isQuestionThree === true && eventCounter === 3 ){
+                isQuestionTwo = false;
+                question.innerText = "Have you ever encountered the term gamification?";
+                isQuestionFour = true;
+                progressBar.value = 50;
+            } 
+            if(isQuestionFour === true && eventCounter === 4 ){
+                isQuestionThree = false;
+                question.innerText = "Have you ever filled out a gamified survey?";
+                isQuestionFive = true;
+                progressBar.value = 60
+            } 
+            if(isQuestionFive  === true && eventCounter === 5 ){
+                isQuestionFour = false;
+                question.innerText = "Would you pay more attention to a gamified survey?";
+                isQuestionSix = true;
+                progressBar.value = 70
+            } 
+            if(isQuestionSix === true && eventCounter === 6 ){
+                isQuestionFive = false;
+                question.innerText = "Does this gamified survey pressure you in a positive way?";
+                isQuestionSeven = true;
+                progressBar.value = 80
+            } 
+            if(isQuestionSeven === true && eventCounter === 7 ){
+                isQuestionSix = false;
+                question.innerText = "Does it inspire you to complete the survey?";
+                isQuestionEight = true;
+                progressBar.value = 90
+            } 
+            if(isQuestionEight === true && eventCounter === 8 ){
+                isQuestionSeven = false;
+                question.innerText = "Do you feel motivated to participate out of your own will?";
+                isQuestionNine = true;
+                progressBar.value = 100
+            }
+            if(isQuestionNine === true && eventCounter === 9){
+                isQuestionEight = false;
+                isQuestionOne = true;
+                cancelAnimationFrame(animationId);
+            }
+        }
+    })
+
+
 
 }
 animate();

@@ -15,104 +15,11 @@ body {
 #canvas {
   border: 1px solid black;
 }
-
-#game {
-  width: 1395px;
-  height: 245px;
-
-  border-bottom: 0.5px solid black;
-  border-top: 0.5px solid black;
-
-  transform: translateY(80%);
-}
 .questions {
   font-size: 25px;
 
   transform: translateY(750%);
   text-align: center;
-}
-.answersUI {
-  font-size: 25px;
-  transform: translate(5%, 820%);
-}
-.neutral {
-  font-size: 25px;
-  transform: translate(45%, 720%);
-}
-.no {
-  font-size: 25px;
-  transform: translate(82%, 620%);
-}
-#character {
-  width: 20px;
-  min-height: 50px;
-  background-color: red;
-
-  position: relative;
-  top: 145px;
-  left: 50%;
-}
-.animate {
-  animation: jump 500ms;
-}
-
-@keyframes jump {
-  0% {
-    top: 120px;
-  }
-  30% {
-    top: 60px;
-  }
-  70% {
-    top: 60px;
-  }
-  100% {
-    top: 120px;
-  }
-}
-
-/* Other */
-#options {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-  grid-gap: 25px;
-}
-#option-One,
-#option-Two,
-#option-Three {
-  width: 62px;
-  min-height: 20px;
-
-  background-color: #5f9ea0;
-  position: relative;
-
-  top: 10%;
-  left: 15%;
-
-  animation: aniOp 1.5s infinite;
-  animation-direction: alternate-reverse;
-
-  padding: 5px;
-}
-#option-One {
-  left: 25%;
-}
-#option-Two {
-}
-#option-Three {
-  left: 35%;
-}
-@keyframes aniOp {
-  0% {
-    left: 750px;
-  }
-  100% {
-    left: 450px;
-  }
-}
-#canvas {
-  border-radius: 5px;
-  background-color: black;
 }
 .header-Survey {
   color: #50394c;
@@ -121,5 +28,42 @@ body {
 
   display: flex;
   justify-content: center;
-  transform: translateY(210px);
+  transform: translateY(150px);
+}
+#file {
+  position: absolute;
+  top: 520px;
+  left: 41.5%;
+
+  width: 250px;
+  height: 35px;
+
+  background-color: green;
+}
+progress::-webkit-progress-bar {
+  background-color: "red";
+}
+.purple,
+.red,
+.green {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  top: -550px;
+  left: 685px;
+  background-color: green;
+
+  text-align: center;
+  justify-content: center;
+}
+.green {
+  background-color: purple;
+}
+.red {
+  background-color: red;
+}
+.purple p,
+.red p,
+.green p {
+  transform: translateX(145%);
 }
