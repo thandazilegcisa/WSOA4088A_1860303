@@ -94,6 +94,7 @@ switch(gender){
 */
 // Loops // 
 
+/*
 for(let i = 0; i<newArray.length; i++){
     console.log(newArray[4]);
 }
@@ -122,7 +123,7 @@ set_Two.FindValue = function (){
 }
 set_Two.FindValue();
 
-
+*/
 
 
 /*
@@ -255,3 +256,5 @@ function animate(){
 }
 animate();
 */
+
+
