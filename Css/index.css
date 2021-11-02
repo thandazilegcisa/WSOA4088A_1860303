@@ -11,8 +11,6 @@
 
   padding: 45px;
   transform: translate(-50%, 0%);
-
-  
 }
 .navigation-container ul {
   list-style-type: none;
@@ -76,6 +74,9 @@
   padding: 25px;
 
   text-align: center;
+  justify-content: center;
+
+  max-width: 1450px;
 }
 
 /* Blogs Section*/
